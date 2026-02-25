@@ -1,6 +1,8 @@
 """
 Django settings for InClassDjango project.
 
+Changness
+
 Based on by 'django-admin startproject' using Django 2.1.2.
 
 For more information on this file, see
