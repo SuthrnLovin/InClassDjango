@@ -39,6 +39,9 @@
     <Compile Include="MyApp\management\commands\importCSV.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="MyApp\management\commands\removeDuplicates.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="MyApp\migrations\__init__.py" />
     <Compile Include="MyApp\models.py" />
     <Compile Include="MyApp\tests.py" />
