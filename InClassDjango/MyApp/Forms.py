@@ -1,7 +1,9 @@
 from django import forms
-from score.models import Score
+from .models import teacher
+
 
 class ScoreForm(forms.ModelForm):
     class Meta:
-        model = Score
-        feilds = ['name', 'vale']
+        model = teacher
+        fields = ['Name', 'Area']
+

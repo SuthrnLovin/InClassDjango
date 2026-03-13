@@ -36,7 +36,7 @@
     <Compile Include="InClassDjango\wsgi.py" />
     <Compile Include="MyApp\admin.py" />
     <Compile Include="MyApp\apps.py" />
-    <Compile Include="MyApp\Forms.py">
+    <Compile Include="MyApp\forms.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MyApp\management\commands\importCSV.py">
