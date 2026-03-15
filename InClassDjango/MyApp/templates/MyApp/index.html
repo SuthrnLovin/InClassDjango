@@ -10,13 +10,16 @@
             <th>Name</th>
             <th>Teaching Area</th>
         </tr>
-            {% for teach in content %}
+        {% for teach in content %}
         <tr>
             <td>{{teach.Name}}</td>
             <td>{{teach.Area}}</td>
         </tr>
         {% endfor %}
     </table>
+    <form>
+        {{ form }}
+    </form>
     {% else %}
     <strong>No Data!</strong>
     {% endif %}
