@@ -4,28 +4,23 @@
 <body>
 
     <strong>Teachers!</strong>
-    {% if content %}
     <table>
         <tr>
             <th>Name</th>
             <th>Teaching Area</th>
         </tr>
-        {% for teach in content %}
+        {% for teach in teach %}
         <tr>
             <td>{{teach.Name}}</td>
             <td>{{teach.Area}}</td>
         </tr>
         {% endfor %}
-        <tr>
-            {% for field in form %}
-            <td>{{ field }}</td>
-            {% endfor %}
-        </tr>
     </table>
-    {% else %}
+    <form>
+        {{ form }}
+    </form>
     <strong>No Data!</strong>
-    {% endif %}
 
-    
+
 </body>
 </html>
