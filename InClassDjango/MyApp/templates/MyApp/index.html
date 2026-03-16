@@ -8,17 +8,26 @@
         <tr>
             <th>Name</th>
             <th>Teaching Area</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            {% for field in form %}
+            <td>
+                {{ field }}
+            </td>
+            {% endfor %}
+            <td><button name="save">Save</button></td>
         </tr>
         {% for teach in teach %}
         <tr>
             <td>{{teach.Name}}</td>
             <td>{{teach.Area}}</td>
+            <td><button name="edit">Edit</button>
+            <button name="delete">Delete</button>
+            </td>
         </tr>
         {% endfor %}
     </table>
-    <form>
-        {{ form }}
-    </form>
     <strong>No Data!</strong>
 
 
