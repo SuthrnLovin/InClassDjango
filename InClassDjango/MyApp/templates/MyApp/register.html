@@ -3,14 +3,9 @@
     <h1> Register now! </h1>
 
     <form method="POST" autocomplete="off">
-
-    {% csrf_token %}
-
-    {{registerform.as_p}}
-
-    <input type="submit" value="Register" />
-
-
+        {% csrf_token %}
+        {{ registerform.as_p }}
+        <button type="submit">Register</button>
     </form>
 
 

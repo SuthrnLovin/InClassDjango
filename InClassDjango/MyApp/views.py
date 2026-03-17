@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from datetime import datetime
 from .models import teacher
 from .Forms import teacherform
-from .Forms import CreatUserForm
+from .Forms import CreateUserForm
 from django.http import HttpResponse
 
 
@@ -13,13 +13,13 @@ def homepage(request):
 def register(request):
     context = {}
     return render(request, 'MyApp/register.html', context)
-    form = CreatUserForm()
+    form1 = CreateUserForm()
     if request.method == "POST":
-       form = CreatUserForm(request.POST)
-       if form.is_valid():
-            form.save()
+       form1 = CreateUserForm(request.POST)
+       if form1.is_valid():
+            form1.save()
             return redirect('my_login')
-    context['registerform'] = form
+    context['registerform'] = form1
 
 
 def my_login(request):
