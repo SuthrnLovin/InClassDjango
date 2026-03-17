@@ -3,24 +3,24 @@
 
 <body>
 
-    <strong>Teachers!</strong>
+    <strong>Students!</strong>
     <form method="post" action="{% url 'index' %}">
         {% csrf_token %}
         <table>
         <tr>
             <th>Name</th>
-            <th>Teaching Area</th>
+            <th>Class area</th>
             <th>Action</th>
         </tr>
         {% if not form.instance.id %}
         <tr>
-            {% include 'save.html' %}
+            {% include 'MyApp/save.html' %}
         </tr>
         {% endif %}
         {% for teach in teach %}
         <tr>
             {% if form.instance.id == teach.id %}
-            {% include 'save.html' %}
+            {% include 'MyApp/save.html' %}
             {% else %}
             <td>{{teach.Name}}</td>
             <td>{{teach.Area}}</td>

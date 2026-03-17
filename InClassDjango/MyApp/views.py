@@ -12,8 +12,15 @@ def index (request):
     form = teacherform()
     if request.method == "POST":
         if 'save' in request.POST:
-            form = teacherform(request.POST)
+            pk = request.POST.get('save')
+            if not pk:
+                form = teacherform(request.POST)
+            else:
+                Teach = teacher.objects.get(id=pk)
+                form = teacherform(request.POST, instance=Teach)
             form.save()
+            form = teacherform()
+
         elif 'delete' in request.POST:
             pk = request.POST.get('delete')
             Teach = teacher.objects.get(id=pk)
