@@ -7,29 +7,30 @@
     <form method="post" action="{% url 'index' %}">
         {% csrf_token %}
         <table>
-            <tr>
-                <th>Name</th>
-                <th>Teaching Area</th>
-                <th>Action</th>
-            </tr>
-            <tr>
-                {% for field in form %}
-                <td>
-                    {{ field }}
-                </td>
-                {% endfor %}
-                <td><button name="save">Save</button></td>
-            </tr>
-            {% for teach in teach %}
-            <tr>
-                <td>{{teach.Name}}</td>
-                <td>{{teach.Area}}</td>
-                <td>
-                    <button formnovalidate name="edit" value="{{ teach.id}}">Edit</button>
-                    <button formnovalidate name="delete" value="{{ teach.id}}">Delete</button>
-                </td>
-            </tr>
-            {% endfor %}
+        <tr>
+            <th>Name</th>
+            <th>Teaching Area</th>
+            <th>Action</th>
+        </tr>
+        {% if not form.instance.id %}
+        <tr>
+            {% include 'save.html' %}
+        </tr>
+        {% endif %}
+        {% for teach in teach %}
+        <tr>
+            {% if form.instance.id == teach.id %}
+            {% include 'save.html' %}
+            {% else %}
+            <td>{{teach.Name}}</td>
+            <td>{{teach.Area}}</td>
+            <td>
+                <button formnovalidate name="edit" value="{{ teach.id}}">Edit</button>
+                <button formnovalidate name="delete" value="{{ teach.id}}">Delete</button>
+            </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
         </table>
     </form>
     <strong>No Data!</strong>

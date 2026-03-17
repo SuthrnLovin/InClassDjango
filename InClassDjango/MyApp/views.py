@@ -16,8 +16,12 @@ def index (request):
             form.save()
         elif 'delete' in request.POST:
             pk = request.POST.get('delete')
-            teach = form.objects.get(id=pk)
-            teach.delete()
+            Teach = teacher.objects.get(id=pk)
+            Teach.delete()
+        elif 'edit' in request.POST:
+            pk = request.POST.get('edit')
+            Teach = teacher.objects.get(id=pk)
+            form = teacherform(instance=Teach) 
 
 
     context['form'] = form
