@@ -50,11 +50,18 @@
     <Compile Include="MyApp\migrations\__init__.py" />
     <Compile Include="MyApp\models.py" />
     <Compile Include="MyApp\tests.py" />
+    <Compile Include="MyApp\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="MyApp\views.py" />
     <Compile Include="MyApp\__init__.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MyApp\templates\MyApp\dashboard.html" />
+    <Content Include="MyApp\templates\MyApp\homepage.html" />
     <Content Include="MyApp\templates\MyApp\index.html" />
+    <Content Include="MyApp\templates\MyApp\my_login.html" />
+    <Content Include="MyApp\templates\MyApp\register.html" />
     <Content Include="MyApp\templates\MyApp\save.html" />
     <Content Include="requirements.txt" />
   </ItemGroup>

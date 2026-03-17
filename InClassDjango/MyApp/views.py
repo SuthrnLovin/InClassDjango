@@ -1,8 +1,32 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from datetime import datetime
 from .models import teacher
 from .Forms import teacherform
+from .Forms import CreatUserForm
+from django.http import HttpResponse
+
+
+def homepage(request):
+    return render(request, 'MyApp/homepage.html')
+
+def register(request):
+    context = {}
+    return render(request, 'MyApp/register.html', context)
+    form = CreatUserForm()
+    if request.method == "POST":
+       form = CreatUserForm(request.POST)
+       if form.is_valid():
+            form.save()
+            return redirect('my_login')
+    context['registerform'] = form
+
+
+def my_login(request):
+    return render(request, 'MyApp/my_login.html')
+
+def dashboard(request):
+    return render(request, 'MyApp/dashboard.html')
 
 
 # Create your views here.
