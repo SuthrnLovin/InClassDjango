@@ -4,30 +4,34 @@
 <body>
 
     <strong>Teachers!</strong>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Teaching Area</th>
-            <th>Action</th>
-        </tr>
-        <tr>
-            {% for field in form %}
-            <td>
-                {{ field }}
-            </td>
+    <form method="post" action="{% url 'index' %}">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Teaching Area</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                {% for field in form %}
+                <td>
+                    {{ field }}
+                </td>
+                {% endfor %}
+                <td><button name="save">Save</button></td>
+            </tr>
+            {% for teach in teach %}
+            <tr>
+                <td>{{teach.Name}}</td>
+                <td>{{teach.Area}}</td>
+                <td>
+                    <button formnovalidate name="edit" value="{{ teach.id}}">Edit</button>
+                    <button formnovalidate name="delete" value="{{ teach.id}}">Delete</button>
+                </td>
+            </tr>
             {% endfor %}
-            <td><button name="save">Save</button></td>
-        </tr>
-        {% for teach in teach %}
-        <tr>
-            <td>{{teach.Name}}</td>
-            <td>{{teach.Area}}</td>
-            <td><button name="edit">Edit</button>
-            <button name="delete">Delete</button>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+        </table>
+    </form>
     <strong>No Data!</strong>
 
 
