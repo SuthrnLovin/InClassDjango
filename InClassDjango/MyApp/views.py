@@ -7,12 +7,10 @@ from .Forms import CreateUserForm
 from django.http import HttpResponse
 
 
-def homepage(request):
-    return render(request, 'MyApp/homepage.html')
+
 
 def register(request):
     context = {}
-    return render(request, 'MyApp/register.html', context)
     form1 = CreateUserForm()
     if request.method == "POST":
        form1 = CreateUserForm(request.POST)
@@ -20,6 +18,10 @@ def register(request):
             form1.save()
             return redirect('my_login')
     context['registerform'] = form1
+    return render(request, 'MyApp/register.html', context)
+
+
+
 
 
 def my_login(request):
