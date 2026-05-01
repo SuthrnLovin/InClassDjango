@@ -29,6 +29,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path( '', include('MyApp.urls')),
     re_path(r'^$', MyApp.views.index, name='index'),
-    re_path(r'^home$', MyApp.views.index, name='home')
+    re_path(r'^home$', MyApp.views.index, name='home'),
+    path('report/', MyApp.views.report, name='report'),
 
 ]
