@@ -14,19 +14,26 @@ from io import BytesIO
 
 
 def generate_pdf():
+    context = {}
+    #write text based on what is in the teachr area
     buffer = BytesIO()
     p = canvas.Canvas(buffer)
     lines = [('Name:', 'Teaching Area:')]
     teach = teacher.objects.all()
     for teach in teach:
         lines.append((teach.Name, teach.Area))
+    field_object = teacher._meta.get_field('Area')
+    if field_object == "English":
+        lines.append('You picked English')
     table = Table(lines)
     table.wrapOn(p, 300, 300)
-    table.drawOn(p, 0, 5)
+    table.drawOn(p, 0, 750)
     p.showPage()
     p.save()
     buffer.seek(0)
+    context['field_object'] = field_object
     return buffer
+
 
 def report(request):
     pdf_file =  staticfiles_storage.path("PracticePDF.pdf")
@@ -60,8 +67,6 @@ def register(request):
 
 
 
-
-
 def my_login(request):
     return render(request, 'MyApp/my_login.html')
 
@@ -74,6 +79,7 @@ def index (request):
     context = {}
     teach = teacher.objects.all()
     form = teacherform()
+    field_object = teacher._meta.get_field('Area')
     if request.method == "POST":
         if 'save' in request.POST:
             pk = request.POST.get('save')
@@ -97,6 +103,7 @@ def index (request):
 
     context['form'] = form
     context['teach'] = teach
+    context['field_object'] = field_object
     
     return render(request, "MyApp/index.html", context)
 
