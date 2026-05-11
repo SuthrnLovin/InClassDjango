@@ -15,7 +15,8 @@ from io import BytesIO
 
 def generate_pdf():
     context = {}
-    #write text based on what is in the teachr area
+    #find the specific id of the row
+    #write text based on what is in the teacher area
     buffer = BytesIO()
     p = canvas.Canvas(buffer)
     lines = [('Name:', 'Teaching Area:')]
@@ -24,7 +25,7 @@ def generate_pdf():
         lines.append((teach.Name, teach.Area))
     field_object = teacher._meta.get_field('Area')
     if field_object == "English":
-        lines.append('You picked English')
+        lines.append(teach.Area)
     table = Table(lines)
     table.wrapOn(p, 300, 300)
     table.drawOn(p, 0, 750)
