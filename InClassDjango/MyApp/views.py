@@ -15,8 +15,6 @@ from io import BytesIO
 
 def generate_pdf():
     context = {}
-    #find the specific id of the row
-    #write text based on what is in the teacher area
     buffer = BytesIO()
     p = canvas.Canvas(buffer)
     lines = [('Name:', 'Teaching Area:')]
@@ -108,4 +106,6 @@ def index (request):
     
     return render(request, "MyApp/index.html", context)
 
- 
+ #make a new form for the unit outline
+
+

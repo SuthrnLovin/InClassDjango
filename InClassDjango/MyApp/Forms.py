@@ -16,3 +16,9 @@ class teacherform(forms.ModelForm):
     class Meta:
         model = teacher
         fields = ['Name', 'Area']
+
+
+class PdfForm(forms.ModelForm):
+    class Meta:
+        model = ['Class']
+        fields = ['area']
