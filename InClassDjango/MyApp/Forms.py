@@ -1,5 +1,6 @@
 from django import forms
 from .models import teacher
+from .models import Unit
 from django.contrib.auth.forms import UserCreationForm, UsernameField
 from django.contrib.auth.forms import User
 
@@ -18,7 +19,7 @@ class teacherform(forms.ModelForm):
         fields = ['Name', 'Area']
 
 
-class PdfForm(forms.ModelForm):
+class UnitPdfForm(forms.ModelForm):
     class Meta:
-        model = ['Class']
-        fields = ['area']
+        model = Unit
+        fields = ['Title', 'Outline']
