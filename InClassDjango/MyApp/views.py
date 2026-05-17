@@ -2,12 +2,58 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from datetime import datetime
 from .models import teacher
+from .models import Unit
+from .Forms import UnitPdfForm
 from .Forms import teacherform
 from .Forms import CreateUserForm
 from django.http import HttpResponse
+from pypdf import PdfWriter, PdfReader
+from reportlab.pdfgen import canvas
+from reportlab.platypus import Table
+from django.http import FileResponse
+from django.contrib.staticfiles.storage import staticfiles_storage
+from io import BytesIO
 
 
+def generate_pdf():
+    context = {}
+    buffer = BytesIO()
+    p = canvas.Canvas(buffer)
+    lines = [('Name:', 'Teaching Area:')]
+    teach = teacher.objects.all()
+    for teach in teach:
+        lines.append((teach.Name, teach.Area))
+    field_object = teacher._meta.get_field('Area')
+    if field_object == "English":
+        lines.append(teach.Area)
+    table = Table(lines)
+    table.wrapOn(p, 300, 300)
+    table.drawOn(p, 0, 750)
+    p.showPage()
+    p.save()
+    buffer.seek(0)
+    context['field_object'] = field_object
+    return buffer
 
+
+def report(request):
+    pdf_file =  staticfiles_storage.path("PracticePDF.pdf")
+    try:
+        merger = PdfWriter()
+        input1 = PdfReader(generate_pdf())
+        input2 = PdfReader(pdf_file, "rb")
+        merger.append(input1)
+        merger.append(input2)
+        buffer = BytesIO()
+        merger.write(buffer)
+        buffer.seek(0)
+        response = FileResponse(buffer, as_attachment=True, filename="hello.pdf")
+    except FileNotFoundError:
+        response = FileResponse(generate_pdf(), as_attachment=True, filename="no.pdf")
+
+    
+
+    return response
 
 def register(request):
     context = {}
@@ -22,8 +68,6 @@ def register(request):
 
 
 
-
-
 def my_login(request):
     return render(request, 'MyApp/my_login.html')
 
@@ -34,8 +78,11 @@ def dashboard(request):
 # Create your views here.
 def index (request):
     context = {}
+    form1 = UnitPdfForm
+    #UnitOutline = 
     teach = teacher.objects.all()
     form = teacherform()
+    field_object = teacher._meta.get_field('Area')
     if request.method == "POST":
         if 'save' in request.POST:
             pk = request.POST.get('save')
@@ -59,7 +106,11 @@ def index (request):
 
     context['form'] = form
     context['teach'] = teach
+    context['field_object'] = field_object
+    context['form1'] = form1
     
     return render(request, "MyApp/index.html", context)
 
- 
+ #make a new form for the unit outline
+
+
