@@ -117,5 +117,5 @@ STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
 
 #media stuff
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'Uploads'
+MEDIA_ROOT = BASE_DIR + '/Uploads/'
 
