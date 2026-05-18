@@ -4,35 +4,49 @@
 <body>
 
     <strong>Students!</strong>
+    <strong>Upload MP3</strong>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">Upload</button>
+    </form>
+    <audio controls>
+        <source src="{{ audio.mp3_file.url }}" type="audio/mpeg">
+    </audio>
     <form method="post" action="{% url 'index' %}">
         {% csrf_token %}
+
         <table>
-        <tr>
-            <th>Name</th>
-            <th>Class area</th>
-            <th>Action</th>
-        </tr>
-        {% if not form.instance.id %}
-        <tr>
-            {% include 'MyApp/save.html' %}
-        </tr>
-        {% endif %}
-        {% for teach in teach %}
-        <tr>
-            {% if form.instance.id == teach.id %}
-            {% include 'MyApp/save.html' %}
-            {% else %}
-            <td>{{teach.Name}}</td>
-            <td>{{teach.Area}}</td>
-            <td>
-                <button formnovalidate name="edit" value="{{ teach.id}}">Edit</button>
-                <button formnovalidate name="delete" value="{{ teach.id}}">Delete</button>
-            </td>
+            <tr>
+                <th>Name</th>
+                <th>Class area</th>
+                <th>Action</th>
+            </tr>
+            {% if not form.instance.id %}
+            <tr>
+                {% include 'MyApp/save.html' %}
+            </tr>
             {% endif %}
-        </tr>
-        {% endfor %}
+            {% for teach in teach %}
+            <tr>
+                {% if form.instance.id == teach.id %}
+                {% include 'MyApp/save.html' %}
+                {% else %}
+                <td>{{teach.Name}}</td>
+                <td>{{teach.Area}}</td>
+                <td>
+                    <button formnovalidate name="edit" value="{{ teach.id}}">Edit</button>
+                    <button formnovalidate name="delete" value="{{ teach.id}}">Delete</button>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
         </table>
     </form>
+
     <p><a href="{% url 'report'%}">PDF report</a></p>
 
 

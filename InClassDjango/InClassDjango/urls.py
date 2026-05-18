@@ -3,6 +3,7 @@ from django.urls import include, re_path
 import MyApp.views
 from django.conf import settings
 from django.conf.urls.static import static
+from MyApp.views import upload_audio
 
 """
 InClassDjango URL Configuration
@@ -33,5 +34,6 @@ urlpatterns = [
     re_path(r'^$', MyApp.views.index, name='index'),
     re_path(r'^home$', MyApp.views.index, name='home'),
     path('report/', MyApp.views.report, name='report'),
+    path('upload/', upload_audio, name='upload_audio'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

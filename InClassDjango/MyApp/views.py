@@ -13,6 +13,28 @@ from reportlab.platypus import Table
 from django.http import FileResponse
 from django.contrib.staticfiles.storage import staticfiles_storage
 from io import BytesIO
+from .Forms import AudioUploadForm
+
+def upload_audio(request):
+    context = []
+    if request.method == 'POST':
+        form = AudioUploadForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return redirect('success')
+
+    else:
+        form = AudioUploadForm()
+
+
+    context['form'] = form
+    return render(request, 'upload.html', context)
+
+
+
+
+
 
 
 def generate_pdf():
@@ -78,7 +100,7 @@ def dashboard(request):
 # Create your views here.
 def index (request):
     context = {}
-    form1 = UnitPdfForm
+    #form1 = UnitPdfForm
     #UnitOutline = 
     teach = teacher.objects.all()
     form = teacherform()
@@ -107,7 +129,7 @@ def index (request):
     context['form'] = form
     context['teach'] = teach
     context['field_object'] = field_object
-    context['form1'] = form1
+    #context['form1'] = form1
     
     return render(request, "MyApp/index.html", context)
 
