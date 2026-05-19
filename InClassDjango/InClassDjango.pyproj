@@ -63,6 +63,7 @@
     <Content Include="MyApp\templates\MyApp\my_login.html" />
     <Content Include="MyApp\templates\MyApp\register.html" />
     <Content Include="MyApp\templates\MyApp\save.html" />
+    <Content Include="MyApp\templates\MyApp\upload.html" />
     <Content Include="requirements.txt" />
     <Content Include="static\PracticePDF.pdf" />
   </ItemGroup>

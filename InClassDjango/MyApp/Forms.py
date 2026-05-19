@@ -4,6 +4,7 @@ from .models import Unit
 from django.contrib.auth.forms import UserCreationForm, UsernameField
 from django.contrib.auth.forms import User
 from .models import AudioFile
+from .models import teacher
 
 class CreateUserForm(UserCreationForm):
     class Meta:

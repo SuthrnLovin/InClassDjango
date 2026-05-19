@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from datetime import datetime
 from .models import teacher
 from .models import Unit
-from .Forms import UnitPdfForm
+#from .Forms import UnitPdfForm
 from .Forms import teacherform
 from .Forms import CreateUserForm
 from django.http import HttpResponse
@@ -16,24 +16,19 @@ from io import BytesIO
 from .Forms import AudioUploadForm
 
 def upload_audio(request):
-    context = []
+    context = {}
     if request.method == 'POST':
         form = AudioUploadForm(request.POST, request.FILES)
 
         if form.is_valid():
             form.save()
-            return redirect('success')
 
     else:
         form = AudioUploadForm()
 
 
     context['form'] = form
-    return render(request, 'upload.html', context)
-
-
-
-
+    return render(request, 'MyApp/upload.html', context)
 
 
 

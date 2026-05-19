@@ -4,18 +4,6 @@
 <body>
 
     <strong>Students!</strong>
-    <strong>Upload MP3</strong>
-
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-
-        {{ form.as_p }}
-
-        <button type="submit">Upload</button>
-    </form>
-    <audio controls>
-        <source src="{{ audio.mp3_file.url }}" type="audio/mpeg">
-    </audio>
     <form method="post" action="{% url 'index' %}">
         {% csrf_token %}
 
