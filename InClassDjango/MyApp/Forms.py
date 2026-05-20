@@ -20,7 +20,7 @@ class AudioUploadForm(forms.ModelForm):
 class teacherform(forms.ModelForm):
     class Meta:
         model = teacher
-        fields = ['Name', 'Area',]
+        fields = ['Name', 'Area']
 
 
 class UnitPdfForm(forms.ModelForm):

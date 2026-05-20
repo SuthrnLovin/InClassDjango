@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from datetime import datetime
 from .models import teacher
 from .models import Unit
-#from .Forms import UnitPdfForm
+from .Forms import UnitPdfForm
 from .Forms import teacherform
 from .Forms import CreateUserForm
 from django.http import HttpResponse
@@ -40,9 +40,9 @@ def generate_pdf():
     teach = teacher.objects.all()
     for teach in teach:
         lines.append((teach.Name, teach.Area))
-    field_object = teacher._meta.get_field('Area')
+    field_object = Unit.objects.get(Title= 'English')
     if field_object == "English":
-        lines.append(teach.Area)
+        lines.append(('It works',))
     table = Table(lines)
     table.wrapOn(p, 300, 300)
     table.drawOn(p, 0, 750)
@@ -67,8 +67,6 @@ def report(request):
         response = FileResponse(buffer, as_attachment=True, filename="hello.pdf")
     except FileNotFoundError:
         response = FileResponse(generate_pdf(), as_attachment=True, filename="no.pdf")
-
-    
 
     return response
 
