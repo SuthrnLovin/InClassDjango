@@ -14,6 +14,7 @@ from django.http import FileResponse
 from django.contrib.staticfiles.storage import staticfiles_storage
 from io import BytesIO
 from .Forms import AudioUploadForm
+from django.test import TestCase
 
 def upload_audio(request):
     context = {}
@@ -32,6 +33,13 @@ def upload_audio(request):
 
 
 
+
+
+
+        
+
+
+
 def generate_pdf():
     context = {}
     buffer = BytesIO()
@@ -40,9 +48,9 @@ def generate_pdf():
     teach = teacher.objects.all()
     for teach in teach:
         lines.append((teach.Name, teach.Area))
-    field_object = Unit.objects.get(Title= 'English')
-    if field_object == "English":
-        lines.append(('It works',))
+    field_object = teacher.objects.filter(Area = 'English')
+    if field_object == 'English':
+        lines.append(("it works", ))
     table = Table(lines)
     table.wrapOn(p, 300, 300)
     table.drawOn(p, 0, 750)
